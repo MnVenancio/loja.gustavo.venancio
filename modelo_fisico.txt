@@ -1,0 +1,62 @@
+CREATE TABLE Cliente 
+( 
+ email INT,  
+ Nome INT,  
+ Telefone INT,  
+ Bairro INT,  
+ Rua INT,  
+ Cidade INT,  
+ Estado INT,  
+ idPedido INT,  
+); 
+
+CREATE TABLE Pessoa_Juridica 
+( 
+ CNPJ INT,  
+ IE INT,  
+ idFornecedor INT,  
+); 
+
+CREATE TABLE Pessoa_Fisica 
+( 
+ CPF INT,  
+ RG INT,  
+); 
+
+CREATE TABLE Pedido 
+( 
+ Data INT,  
+ Valo_Pedido INT,  
+ idProduto INT,  
+ idFornecedor INT,  
+); 
+
+CREATE TABLE Produto 
+( 
+ Nome_Produto INT,  
+ Valor INT,  
+ ID INT,  
+ Categoria INT,  
+); 
+
+CREATE TABLE Estoque 
+( 
+ Qtd_Estoque INT,  
+ idProduto INT,  
+); 
+
+CREATE TABLE Fornecedor 
+( 
+ Matricula INT,  
+ Nome INT,  
+ Email INT,  
+ Telefone INT,  
+ idPessoa_Fisica INT,  
+); 
+
+ALTER TABLE Cliente ADD FOREIGN KEY(idPedido) REFERENCES Pedido (idPedido)
+ALTER TABLE Pessoa_Juridica ADD FOREIGN KEY(idFornecedor) REFERENCES Fornecedor (idFornecedor)
+ALTER TABLE Pedido ADD FOREIGN KEY(idProduto) REFERENCES Produto (idProduto)
+ALTER TABLE Pedido ADD FOREIGN KEY(idFornecedor) REFERENCES Fornecedor (idFornecedor)
+ALTER TABLE Estoque ADD FOREIGN KEY(idProduto) REFERENCES Produto (idProduto)
+ALTER TABLE Fornecedor ADD FOREIGN KEY(idPessoa_Fisica) REFERENCES Pessoa_Fisica (idPessoa_Fisica)
